@@ -11,6 +11,8 @@ const transporter = nodemailer.createTransport({
 });
 
 async function sendEmail({ to, subject, body }) {
+  console.log("📧 About to send email to:", to);
+
   try {
     await transporter.sendMail({
       from: `"EntreSkill Hub" <${process.env.EMAIL_USER}>`,
@@ -18,8 +20,10 @@ async function sendEmail({ to, subject, body }) {
       subject,
       text: body,
     });
+
+    console.log("✅ Email sent successfully");
   } catch (err) {
-    console.error("SMTP ERROR:", err);
+    console.error("❌ SMTP ERROR:", err);
     throw err;
   }
 }
