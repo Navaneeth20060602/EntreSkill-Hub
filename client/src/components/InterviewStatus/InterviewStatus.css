@@ -1,0 +1,71 @@
+.interview-status-page{
+    max-width:600px;
+    margin:0 auto;
+    padding: 50px var(--spacing-md);
+}
+
+.interview-status-card{
+    background:white;
+    padding:32px;
+    border-radius: var(--radius-md);
+    box-shadow:0 4px 14px rgba(0,0,0,.06);
+    text-align:center;
+}
+
+.interview-status-card h2{
+    color: var(--color-text);
+    margin-bottom:16px;
+}
+
+.interview-blocked{
+    background: var(--color-warning-bg);
+    color: var(--color-warning);
+    padding:24px;
+    border-radius: var(--radius-md);
+    text-align:center;
+}
+
+.interview-blocked button{
+    margin-top:14px;
+    padding: var(--spacing-sm) 24px;
+    background: var(--color-primary);
+    color:white;
+    border:none;
+    border-radius: var(--radius-sm);
+    cursor:pointer;
+}
+
+.interview-detail-row{
+    display:flex;
+    justify-content:space-between;
+    padding:10px 0;
+    border-bottom: 1px solid var(--color-border-subtle);
+    color: var(--color-text-body);
+    font-size:14px;
+}
+
+.interview-meet-link{
+    display:inline-block;
+    margin-top: var(--spacing-md);
+    padding: var(--spacing-sm) 24px;
+    background: var(--color-primary);
+    color:white;
+    border-radius: var(--radius-sm);
+    text-decoration:none;
+    font-weight:600;
+}
+
+.interview-countdown{
+    background: var(--color-warning-bg);
+    color: var(--color-warning);
+    padding:10px 14px;
+    border-radius: var(--radius-sm);
+    font-size:13px;
+    font-weight:600;
+    margin:10px 0;
+}
+
+.interview-countdown.live{
+    background: var(--color-success-bg);
+    color: var(--color-success);
+}

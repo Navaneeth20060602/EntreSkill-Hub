@@ -1,0 +1,188 @@
+.report-card-backdrop{
+    position:fixed;
+    top:0; left:0; right:0; bottom:0;
+    background:rgba(0,0,0,.5);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    z-index:1000;
+    padding: var(--spacing-md);
+}
+
+.report-card-box{
+    background:linear-gradient(white, white) padding-box,
+        linear-gradient(135deg, var(--color-primary), var(--color-accent)) border-box;
+    border:3px solid transparent;
+    border-radius:18px;
+    padding:36px;
+    max-width:460px;
+    width:100%;
+    max-height:85vh;
+    overflow-y:auto;
+    position:relative;
+    text-align:center;
+}
+
+.report-card-seal{
+    width:56px;
+    height:56px;
+    margin: 0 auto var(--spacing-xs);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:28px;
+    border-radius:50%;
+    background: var(--color-warning-bg);
+    box-shadow:0 0 0 4px #FEF9E7;
+}
+
+.report-card-header{
+    margin-bottom:14px;
+}
+
+.report-card-kicker{
+    display:block;
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    color: var(--color-accent);
+    margin-bottom: var(--spacing-xs);
+}
+
+.report-card-close{
+    position:absolute;
+    top:14px;
+    right:14px;
+    background:none;
+    border:none;
+    font-size:16px;
+    cursor:pointer;
+    color: var(--color-text-muted);
+}
+
+.report-card-box h3{
+    color: var(--color-text);
+    margin-bottom:4px;
+    font-size:24px;
+    font-weight:800;
+    letter-spacing:-0.01em;
+}
+
+.report-card-subtitle{
+    color: var(--color-text-muted);
+    font-size:15px;
+    font-weight:600;
+}
+
+.only-print{
+    display:none;
+}
+
+.report-card-marks{
+    text-align:left;
+    margin-top: var(--spacing-md);
+    border-top: 1px dashed var(--color-border);
+    padding-top: var(--spacing-sm);
+}
+
+.report-card-row{
+    display:flex;
+    justify-content:space-between;
+    padding:10px 0;
+    border-bottom: 1px solid var(--color-border-subtle);
+    font-size:14px;
+    color: var(--color-text-body);
+}
+
+.report-card-row span{
+    color: var(--color-text-muted);
+}
+
+.report-card-row strong{
+    color: var(--color-text);
+    font-weight:700;
+}
+
+.report-card-row strong.pass{ color:var(--color-success); }
+.report-card-row strong.fail{ color:var(--color-danger-dark); }
+
+.report-card-badge{
+    display:inline-block;
+    margin-top:2px;
+    padding:6px 18px;
+    border-radius: var(--radius-pill);
+    font-size:13px;
+    font-weight:700;
+    letter-spacing:.02em;
+}
+
+.report-card-badge.COMPLETED{ background:var(--color-success-bg); color:var(--color-success); }
+.report-card-badge.PENDING_APPROVAL{ background:var(--color-warning-bg); color:var(--color-warning); }
+.report-card-badge.IN_PROGRESS{ background:var(--color-info-bg); color:var(--color-primary-dark); }
+
+.report-card-certificate{
+    display:block;
+    margin-top: var(--spacing-md);
+    text-align:center;
+    padding: var(--spacing-sm);
+    background: var(--color-primary);
+    color:white;
+    border-radius: var(--radius-sm);
+    text-decoration:none;
+    font-weight:600;
+}
+
+.report-card-download-btn{
+    flex:1;
+    display:block;
+    text-align:center;
+    padding: var(--spacing-sm);
+    background: var(--color-primary);
+    color:white;
+    border:none;
+    border-radius: var(--radius-sm);
+    text-decoration:none;
+    font-weight:600;
+    cursor:pointer;
+    font-size:14px;
+}
+
+@media print{
+    body *{
+        visibility:hidden;
+    }
+
+    .report-card-backdrop, .report-card-backdrop *{
+        visibility:visible;
+    }
+
+    .no-print{
+        display:none !important;
+    }
+
+    .report-card-backdrop{
+        position:fixed;
+        top:0; left:0; right:0; bottom:auto;
+        background:none;
+        padding:0;
+        display:block;
+    }
+
+    .printable-report-card{
+        box-shadow:none;
+        max-height:none;
+        max-width:100%;
+        width:100%;
+        margin:0;
+        border-radius:0;
+    }
+
+    .only-print{
+        display:block;
+        margin-top: var(--spacing-md);
+        font-size:12px;
+        color: var(--color-text-muted);
+        text-align:center;
+    }
+}

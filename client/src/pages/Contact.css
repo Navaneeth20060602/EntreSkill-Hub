@@ -1,0 +1,115 @@
+.contact-type-tabs{
+    display:flex;
+    gap:10px;
+    margin-top:24px;
+    flex-wrap:wrap;
+}
+
+.contact-type-btn{
+    padding:10px 18px;
+    border:1px solid #D1D5DB;
+    border-radius: var(--radius-pill);
+    background:white;
+    cursor:pointer;
+    font-size:14px;
+    color: var(--color-text-body);
+}
+
+.contact-type-btn.active{
+    background: var(--color-primary);
+    color:white;
+    border-color: var(--color-primary);
+}
+
+.contact-type-hint{
+    color: var(--color-text-subtle);
+    font-size:13px;
+    margin-top: var(--spacing-xs);
+}
+
+.star-rating{
+    font-size:26px;
+    color:#D1D5DB;
+    cursor:pointer;
+}
+
+.star.filled{
+    color: var(--color-accent);
+}
+
+.ticket-history{
+    margin-top:50px;
+}
+
+.ticket-history h2{
+    color: var(--color-text);
+    margin-bottom: var(--spacing-md);
+}
+
+.ticket-card{
+    background:white;
+    padding: var(--spacing-md);
+    border-radius: var(--radius-md);
+    box-shadow:0 4px 14px rgba(0,0,0,.06);
+    margin-bottom:16px;
+}
+
+.ticket-card-header{
+    display:flex;
+    gap:10px;
+    margin-bottom:10px;
+}
+
+.ticket-type-badge, .ticket-status-badge{
+    padding:3px 10px;
+    border-radius: var(--radius-pill);
+    font-size:11px;
+    font-weight:700;
+    text-transform:uppercase;
+}
+
+.ticket-type-badge.FEEDBACK{ background:var(--color-info-bg); color:var(--color-primary-dark); }
+.ticket-type-badge.SUGGESTION{ background:var(--color-warning-bg); color:var(--color-warning); }
+.ticket-type-badge.COMPLAINT{ background:#FEE2E2; color:var(--color-danger-dark); }
+
+.ticket-status-badge.OPEN{ background:var(--color-bg-alt); color:var(--color-text-body); }
+.ticket-status-badge.RESPONDED{ background:var(--color-success-bg); color:var(--color-success); }
+.ticket-status-badge.TRANSFERRED{ background:#EDE9FE; color:#6D28D9; }
+.ticket-status-badge.RESOLVED{ background:var(--color-success-bg); color:var(--color-success); }
+.ticket-status-badge.CLOSED{ background:var(--color-border); color:#374151; }
+
+.ticket-card h4{
+    color: var(--color-text);
+    margin-bottom:6px;
+}
+
+.ticket-card p{
+    color: var(--color-text-body);
+    font-size:14px;
+}
+
+.ticket-response{
+    margin-top: var(--spacing-sm);
+    padding: var(--spacing-sm);
+    background:#F9FAFB;
+    border-radius: var(--radius-sm);
+    border-left: 3px solid var(--color-primary);
+}
+
+.ticket-transferred-note{
+    margin-top:10px;
+    font-style:italic;
+    color:#6D28D9;
+}
+
+.empty-note{
+    color: var(--color-text-subtle);
+    font-style:italic;
+}
+
+.ticket-number{
+    font-size:12px;
+    color: var(--color-text-muted);
+    font-weight:600;
+    letter-spacing:0.5px;
+}

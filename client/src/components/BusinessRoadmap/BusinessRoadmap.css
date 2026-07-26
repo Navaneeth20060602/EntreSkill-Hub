@@ -1,0 +1,123 @@
+.roadmap{
+
+    padding: var(--spacing-xl);
+
+    background: var(--color-bg);
+
+    min-height:80vh;
+
+}
+
+.roadmap h2{
+
+    color: var(--color-text);
+
+    margin-bottom:10px;
+
+}
+
+.roadmap p{
+
+    color: var(--color-text-muted);
+
+    margin-bottom:40px;
+
+}
+
+.roadmap-list{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:25px;
+
+}
+
+.roadmap-card{
+
+    background:white;
+
+    border-radius: var(--radius-md);
+
+    padding:25px;
+
+    border: 1px solid var(--color-border);
+
+    display:flex;
+
+    align-items:center;
+
+    gap: var(--spacing-md);
+
+    box-shadow:0 5px 15px rgba(0,0,0,.05);
+
+}
+
+.step-number{
+
+    width:45px;
+
+    height:45px;
+
+    border-radius:50%;
+
+    background: var(--color-primary);
+
+    color:white;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-weight:bold;
+
+    font-size:18px;
+
+}
+.roadmap-locked{
+    background: var(--color-warning-bg);
+    color: var(--color-warning);
+    padding:40px;
+    border-radius: var(--radius-md);
+    text-align:center;
+    margin-top: var(--spacing-md);
+}
+
+.roadmap-locked button{
+    margin-top:16px;
+    padding: var(--spacing-sm) 24px;
+    background: var(--color-primary);
+    color:white;
+    border:none;
+    border-radius: var(--radius-sm);
+    cursor:pointer;
+    font-size:15px;
+}
+
+.roadmap-tip{
+    background: var(--color-primary-light);
+    color: var(--color-primary-dark);
+    padding: 16px var(--spacing-md);
+    border-radius:10px;
+    margin-bottom:24px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap: var(--spacing-sm);
+    font-size:14px;
+}
+
+.roadmap-tip button{
+    padding: var(--spacing-xs) 16px;
+    background: var(--color-primary);
+    color:white;
+    border:none;
+    border-radius:6px;
+    cursor:pointer;
+    font-size:13px;
+    white-space:nowrap;
+}

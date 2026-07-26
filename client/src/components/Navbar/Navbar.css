@@ -1,0 +1,184 @@
+/* ===========================
+   NAVBAR
+=========================== */
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 18px var(--spacing-xl);
+
+    background-color: white;
+
+    border-bottom: 1px solid var(--color-border);
+}
+
+/* ===========================
+   LOGO
+=========================== */
+
+.navbar__logo {
+    font-size: 28px;
+    font-weight: 700;
+
+    color: var(--color-primary);
+
+    cursor: pointer;
+}
+
+/* ===========================
+   NAVIGATION LINKS
+=========================== */
+
+.navbar__links {
+    display: flex;
+    gap: 35px;
+
+    list-style: none;
+}
+
+.navbar__links li {
+    cursor: pointer;
+
+    font-size: 17px;
+
+    color: #374151;
+
+    transition: 0.3s;
+}
+
+.navbar__links li:hover {
+    color: var(--color-primary);
+}
+
+/* ===========================
+   BUTTONS
+=========================== */
+
+.navbar__buttons {
+    display: flex;
+    gap: 15px;
+}
+
+.navbar__login-btn,
+.navbar__register-btn {
+
+    padding: 10px 22px;
+
+    border-radius: var(--radius-sm);
+
+    font-size: 16px;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.navbar__login-btn {
+
+    background: white;
+
+    border: 1px solid var(--color-primary);
+
+    color: var(--color-primary);
+}
+
+.navbar__login-btn:hover {
+
+    background: var(--color-primary-light);
+}
+
+.navbar__register-btn {
+
+    background: var(--color-primary);
+
+    color: white;
+
+    border: none;
+}
+
+.navbar__register-btn:hover {
+
+    background: var(--color-primary-dark);
+}
+
+.navbar a{
+    text-decoration:none;
+    color:inherit;
+}
+.language-switcher{
+    position:relative;
+}
+
+.language-switcher-btn{
+    padding: var(--spacing-xs) 14px;
+    background: var(--color-bg-alt);
+    color: var(--color-text-body);
+    border:none;
+    border-radius: var(--radius-sm);
+    cursor:pointer;
+    font-size:13px;
+}
+
+.language-switcher-btn:hover{
+    background: var(--color-border);
+}
+
+.language-dropdown{
+    position:absolute;
+    top:calc(100% + 6px);
+    right:0;
+    background:white;
+    border-radius:10px;
+    box-shadow:0 8px 24px rgba(0,0,0,.12);
+    padding:6px;
+    z-index:100;
+    min-width:130px;
+}
+
+.language-option{
+    display:block;
+    width:100%;
+    text-align:left;
+    padding: var(--spacing-xs) var(--spacing-sm);
+    background:none;
+    border:none;
+    border-radius:6px;
+    cursor:pointer;
+    font-size:13px;
+    color: var(--color-text-body);
+}
+
+.language-option:hover{
+    background: var(--color-bg-alt);
+}
+
+.language-option.active{
+    background: var(--color-primary-light);
+    color: var(--color-primary);
+    font-weight:600;
+}
+
+.navbar__avatar-btn{
+    display:flex;
+    align-items:center;
+    gap: var(--spacing-xs);
+}
+
+.navbar__avatar{
+    width:26px;
+    height:26px;
+    border-radius:50%;
+    object-fit:cover;
+}
+
+.navbar__avatar-fallback{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background: var(--color-primary);
+    color:white;
+    font-size:12px;
+    font-weight:700;
+}

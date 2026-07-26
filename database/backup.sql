@@ -1,0 +1,4 @@
+-- This file is a placeholder target for scripts/backup.js.
+-- Running `node scripts/backup.js` overwrites this file with a fresh
+-- `pg_dump` of the database configured in server/.env.development.
+-- It is intentionally empty until you run a backup.

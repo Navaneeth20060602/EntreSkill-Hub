@@ -1,0 +1,28 @@
+.google-signin-wrap{
+    display:flex;
+    justify-content:center;
+    margin:16px 0;
+}
+
+.google-divider{
+    display:flex;
+    align-items:center;
+    gap: var(--spacing-sm);
+    color: var(--color-text-subtle);
+    font-size:13px;
+    margin:16px 0;
+}
+
+.google-divider::before, .google-divider::after{
+    content:"";
+    flex:1;
+    height:1px;
+    background: var(--color-border);
+}
+
+.google-signin-note{
+    text-align:center;
+    color: var(--color-text-subtle);
+    font-size:12px;
+    margin-top: var(--spacing-xs);
+}

@@ -1,0 +1,120 @@
+.recommendations{
+
+    margin-top:50px;
+
+}
+
+.recommendations h2{
+
+    color: var(--color-text);
+
+    margin-bottom:10px;
+
+}
+
+.recommendations > p{
+
+    color: var(--color-text-muted);
+
+    margin-bottom: var(--spacing-lg);
+
+}
+
+.recommendations-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+
+    gap:25px;
+
+}
+
+.recommendation-card{
+
+    background:white;
+
+    border: 1px solid var(--color-border);
+
+    border-radius: var(--radius-md);
+
+    padding:25px;
+
+    box-shadow:0 5px 15px rgba(0,0,0,.05);
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+.recommendation-card h3{
+
+    color: var(--color-primary);
+
+    margin-bottom:15px;
+
+}
+
+.recommendation-card p{
+
+    color: var(--color-text-body);
+
+    line-height:1.6;
+
+    flex:1;
+
+    margin-bottom: var(--spacing-md);
+
+}
+
+.recommendation-card button{
+
+    background: var(--color-primary);
+
+    color:white;
+
+    border:none;
+
+    border-radius: var(--radius-sm);
+
+    padding: var(--spacing-sm);
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.recommendation-card button:hover{
+
+    background: var(--color-primary-dark);
+
+}
+.locked-focus-card{
+    border: 2px solid var(--color-primary);
+}
+
+.switch-course-btn{
+    background:none;
+    border:1px solid #D1D5DB;
+    color: var(--color-text-muted);
+    margin-top:10px;
+}
+
+.journey-summary-card{
+    max-width:500px;
+}
+
+.journey-course-name{
+    font-size:20px;
+    font-weight:700;
+    color: var(--color-primary);
+    margin:6px 0;
+}
+
+.journey-completed-note{
+    color: var(--color-success);
+    font-size:13px;
+    margin-top:10px;
+}

@@ -1,0 +1,31 @@
+.certificate-status-page{
+    max-width:600px;
+    margin:0 auto;
+    padding: 50px var(--spacing-md);
+}
+
+.certificate-blocked{
+    background: var(--color-warning-bg);
+    color: var(--color-warning);
+    padding:24px;
+    border-radius: var(--radius-md);
+    text-align:center;
+}
+
+.certificate-blocked button{
+    margin-top:14px;
+    padding: var(--spacing-sm) 24px;
+    background: var(--color-primary);
+    color:white;
+    border:none;
+    border-radius: var(--radius-sm);
+    cursor:pointer;
+}
+
+.certificate-waiting{
+    background: var(--color-primary-light);
+    color: var(--color-primary-dark);
+    padding:24px;
+    border-radius: var(--radius-md);
+    text-align:center;
+}

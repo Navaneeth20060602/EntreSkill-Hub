@@ -1,0 +1,57 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------------
+   Design tokens — single source of truth for colors, radii, and spacing
+   used across the hand-written component CSS files (client/src/components
+   and client/src/pages). New components should use these variables
+   instead of hardcoded hex/px values; existing files can be migrated
+   incrementally without breaking anything, since the token values match
+   the colors already in use.
+   --------------------------------------------------------------------- */
+:root {
+  /* Brand */
+  --color-primary: #2563EB;
+  --color-primary-dark: #1D4ED8;
+  --color-primary-light: #EFF6FF;
+  --color-accent: #F59E0B;
+
+  /* Text */
+  --color-text: #1F2937;
+  --color-text-muted: #6B7280;
+  --color-text-subtle: #9CA3AF;
+  --color-text-body: #4B5563;
+
+  /* Surfaces */
+  --color-bg: #F5F7FB;
+  --color-bg-alt: #F3F4F6;
+  --color-surface: #FFFFFF;
+  --color-border: #E5E7EB;
+  --color-border-subtle: #F3F4F6;
+
+  /* Status */
+  --color-success: #15803D;
+  --color-success-bg: #DCFCE7;
+  --color-warning: #92400E;
+  --color-warning-bg: #FEF3C7;
+  --color-danger: #DC2626;
+  --color-danger-dark: #B91C1C;
+  --color-info-bg: #DBEAFE;
+
+  /* Radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-pill: 20px;
+
+  /* Spacing */
+  --spacing-xs: 8px;
+  --spacing-sm: 12px;
+  --spacing-md: 20px;
+  --spacing-lg: 30px;
+  --spacing-xl: 60px;
+
+  /* Shadow */
+  --shadow-sm: 0 4px 14px rgba(0, 0, 0, .06);
+  --shadow-md: 0 5px 15px rgba(0, 0, 0, .05);
+  --shadow-lg: 0 10px 30px rgba(0, 0, 0, .15);
+}

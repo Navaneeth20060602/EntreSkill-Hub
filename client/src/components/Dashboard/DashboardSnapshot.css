@@ -1,0 +1,60 @@
+.dashboard-snapshot-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 16px;
+    margin: 20px 0;
+}
+
+.snapshot-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: 0 1px 4px rgba(15, 23, 42, 0.06);
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.snapshot-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.1);
+}
+
+.snapshot-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 9px;
+    background: #f1e9ff;
+    color: #863bff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.snapshot-card h4 {
+    margin: 0 0 6px;
+    font-size: 14px;
+}
+
+.snapshot-card p {
+    margin: 0;
+    font-size: 13px;
+    color: #6b7280;
+}
+
+.snapshot-notif-list {
+    margin: 0;
+    padding-left: 16px;
+    font-size: 13px;
+    color: #6b7280;
+}
+
+.snapshot-notif-list li {
+    margin-bottom: 4px;
+}
+
+@media (max-width: 480px) {
+    .dashboard-snapshot-grid {
+        grid-template-columns: 1fr;
+    }
+}

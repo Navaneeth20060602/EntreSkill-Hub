@@ -1,0 +1,140 @@
+{
+  "info": {
+    "name": "EntreSkill Hub API",
+    "description": "Manual test collection for the EntreSkill Hub backend.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:5000/api" }
+  ],
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Register",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"fullName\": \"Test User\",\n  \"email\": \"test@example.com\",\n  \"mobile\": \"9999999999\",\n  \"password\": \"password123\"\n}"
+            },
+            "url": "{{baseUrl}}/auth/register"
+          }
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"test@example.com\",\n  \"password\": \"password123\"\n}"
+            },
+            "url": "{{baseUrl}}/auth/login"
+          }
+        },
+        {
+          "name": "Get Current User",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/auth/me"
+          }
+        },
+        {
+          "name": "Logout",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/auth/logout"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Business Ideas",
+      "item": [
+        {
+          "name": "List Businesses",
+          "request": { "method": "GET", "url": "{{baseUrl}}/business" }
+        },
+        {
+          "name": "Get Business by ID",
+          "request": { "method": "GET", "url": "{{baseUrl}}/business/:id" }
+        },
+        {
+          "name": "Get Recommendations",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"skills\": [\"Cooking\"]\n}" },
+            "url": "{{baseUrl}}/business/recommendations"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Mentors",
+      "item": [
+        { "name": "List Mentors", "request": { "method": "GET", "url": "{{baseUrl}}/mentors" } }
+      ]
+    },
+    {
+      "name": "Learning",
+      "item": [
+        { "name": "Get Learning Resource", "request": { "method": "GET", "url": "{{baseUrl}}/learning/:businessId" } }
+      ]
+    },
+    {
+      "name": "Roadmap",
+      "item": [
+        { "name": "Get Roadmap", "request": { "method": "GET", "url": "{{baseUrl}}/roadmap/:businessId" } },
+        { "name": "Get My Progress", "request": { "method": "GET", "url": "{{baseUrl}}/roadmap/:businessId/progress" } },
+        {
+          "name": "Save My Progress",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"completedSteps\": [\"Learn food safety\"]\n}" },
+            "url": "{{baseUrl}}/roadmap/:businessId/progress"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Profile",
+      "item": [
+        { "name": "Get Profile", "request": { "method": "GET", "url": "{{baseUrl}}/profile" } },
+        {
+          "name": "Save Skills",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"selectedSkills\": [\"Cooking\"],\n  \"primarySkill\": \"Cooking\"\n}" },
+            "url": "{{baseUrl}}/profile/skills"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Calculator",
+      "item": [
+        {
+          "name": "Estimate",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"businessId\": \"\",\n  \"monthsToSave\": 6\n}" },
+            "url": "{{baseUrl}}/calculator/estimate"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Schemes",
+      "item": [
+        { "name": "List Schemes", "request": { "method": "GET", "url": "{{baseUrl}}/schemes" } }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,134 @@
+.register{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding: 70px var(--spacing-md);
+    background: var(--color-bg);
+}
+
+.register-box{
+    width:460px;
+    background:white;
+    padding:40px;
+    border-radius: var(--radius-md);
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+}
+
+.register-box h2{
+    text-align:center;
+    color: var(--color-text);
+    margin-bottom:10px;
+    font-size:30px;
+}
+
+.register-box p{
+    text-align:center;
+    color: var(--color-text-muted);
+    margin-bottom: var(--spacing-lg);
+    line-height:1.5;
+}
+
+.otp-row{
+    display:flex;
+    gap:10px;
+    margin-bottom:16px;
+}
+
+.otp-row input{
+    margin-bottom:0;
+    flex:1;
+}
+
+.otp-btn{
+    white-space:nowrap;
+    padding:0 16px;
+    background: var(--color-primary);
+    color:white;
+    border:none;
+    border-radius: var(--radius-sm);
+    cursor:pointer;
+    font-size:14px;
+}
+
+.otp-btn:hover{
+    background: var(--color-primary-dark);
+}
+
+.otp-btn:disabled{
+    background:#93C5FD;
+    cursor:not-allowed;
+}
+
+.otp-verified-badge{
+    display:flex;
+    align-items:center;
+    color:#16A34A;
+    font-weight:600;
+    white-space:nowrap;
+    padding: 0 var(--spacing-xs);
+}
+
+.otp-demo-note{
+    background: var(--color-warning-bg);
+    color: var(--color-warning);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--radius-sm);
+    font-size:13px;
+    margin-bottom:16px;
+    text-align:left;
+}
+
+.register-box form{
+    display:flex;
+    flex-direction:column;
+}
+
+.register-box label{
+    margin-bottom: var(--spacing-xs);
+    margin-top:15px;
+    font-weight:600;
+    color:#374151;
+}
+
+.register-box input{
+    padding:14px;
+    font-size:16px;
+    border:1px solid #d1d5db;
+    border-radius: var(--radius-sm);
+    outline:none;
+}
+
+.register-box input:focus{
+    border-color: var(--color-primary);
+}
+
+.register-box button{
+    margin-top: var(--spacing-lg);
+    padding:14px;
+    background: var(--color-primary);
+    color:white;
+    border:none;
+    border-radius: var(--radius-sm);
+    font-size:17px;
+    cursor:pointer;
+    font-weight:600;
+}
+
+.register-box button:hover{
+    background: var(--color-primary-dark);
+}
+
+.register-box button:disabled{
+    opacity:.7;
+    cursor:not-allowed;
+}
+
+.register-error{
+    background:#fee2e2;
+    color: var(--color-danger-dark);
+    padding:10px 14px;
+    border-radius: var(--radius-sm);
+    font-size:14px;
+    text-align:center;
+    margin-bottom:15px;
+}

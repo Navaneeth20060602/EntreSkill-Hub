@@ -1,0 +1,312 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Role {
+  USER
+  MENTOR
+  ADMIN
+}
+
+model User {
+  id             String   @id @default(uuid())
+  fullName       String
+  email          String   @unique
+  mobile         String?  @unique
+  mobileVerified Boolean  @default(false)
+  passwordHash   String
+  role           Role     @default(USER)
+  bio            String?
+  photo          String?
+  preferredLanguage String @default("en")
+  failedLoginAttempts Int @default(0)
+  lockedUntil    DateTime?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  assignedMentorId String?
+  assignedMentor   Mentor?  @relation("AssignedMentor", fields: [assignedMentorId], references: [id])
+
+  progress        UserProgress?
+  mentorProfile   Mentor?              @relation("MentorLogin")
+  feedbacks       Feedback[]
+  contactMessages ContactMessage[]
+  enrollments     BusinessEnrollment[]
+  chatMessages    ChatMessage[]
+  certificates    Certificate[]
+  resourceRatings ResourceRating[]
+  notifications   Notification[]
+
+  @@map("users")
+}
+
+model Notification {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  message   String
+  link      String?
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  @@map("notifications")
+}
+
+model UserProgress {
+  id                    String   @id @default(uuid())
+  userId                String   @unique
+  user                  User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  selectedSkills        String[] @default([])
+  primarySkill          String?
+  selectedBusinessId    String?
+  selectedBusiness      BusinessIdea? @relation(fields: [selectedBusinessId], references: [id])
+  selectedBusinessTitle String?
+  completedSteps        String[] @default([])
+  resourcesCompleted    Boolean  @default(false)
+  bookmarkedBusinessIds String[] @default([])
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+
+  @@map("user_progress")
+}
+
+model BusinessIdea {
+  id             String   @id @default(uuid())
+  title          String   @unique
+  skill          String
+  description    String
+  investment     String
+  income         String
+  difficulty     String
+  duration       String
+  requiredSkills String[] @default([])
+  roadmapSteps   String[] @default([])
+  createdAt      DateTime @default(now())
+
+  learningResource LearningResource?
+  progressEntries  UserProgress[]
+
+  @@map("business_ideas")
+}
+
+model LearningResource {
+  id             String   @id @default(uuid())
+  businessId     String   @unique
+  business       BusinessIdea @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  skills         String[] @default([])
+  courses        String[] @default([])
+  pdfs           String[] @default([])
+  certifications String[] @default([])
+  youtube        Json     @default("[]")
+
+  @@map("learning_resources")
+}
+
+model Mentor {
+  id             String  @id @default(uuid())
+  name           String
+  specialization String
+  experience     String
+  rating         Float   @default(0) // auto-computed average of Feedback ratings
+  location       String
+  email          String
+  phone          String?
+  photo          String?
+  bio            String?
+
+  userId String? @unique
+  user   User?   @relation("MentorLogin", fields: [userId], references: [id])
+
+  assignedStudents User[] @relation("AssignedMentor")
+
+  resources        MentorResource[]
+  feedbacks        Feedback[]
+  chatMessages     ChatMessage[]
+  examQuestions    ExamQuestion[]
+  examPapers       ExamPaper[]
+  contactTransfers ContactMessage[]
+  certificatesIssued Certificate[]
+
+  @@map("mentors")
+}
+
+model MentorResource {
+  id            String   @id @default(uuid())
+  mentorId      String
+  mentor        Mentor   @relation(fields: [mentorId], references: [id], onDelete: Cascade)
+  title         String
+  url           String?
+  noteText      String?
+  contentType   String   @default("video") // "video" | "link" | "notes"
+  businessTitle String? // the specific sub-skill/business this resource belongs to
+  description   String?
+  approved      Boolean  @default(false)
+  rejected      Boolean  @default(false)
+  rejectionReason String?
+  createdAt     DateTime @default(now())
+
+  ratings ResourceRating[]
+
+  @@map("mentor_resources")
+}
+
+model ResourceRating {
+  id         String   @id @default(uuid())
+  resourceId String
+  resource   MentorResource @relation(fields: [resourceId], references: [id], onDelete: Cascade)
+  userId     String
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  rating     Int
+  createdAt  DateTime @default(now())
+
+  @@unique([resourceId, userId])
+  @@map("resource_ratings")
+}
+
+model Feedback {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  mentorId  String?
+  mentor    Mentor?  @relation(fields: [mentorId], references: [id], onDelete: SetNull)
+  message   String
+  rating    Int      @default(5)
+  createdAt DateTime @default(now())
+
+  @@map("feedback")
+}
+
+model GovernmentScheme {
+  id          String  @id @default(uuid())
+  name        String
+  description String
+  eligibility String
+  link        String
+
+  @@map("government_schemes")
+}
+
+model ChatMessage {
+  id         String   @id @default(uuid())
+  userId     String
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  mentorId   String
+  mentor     Mentor   @relation(fields: [mentorId], references: [id], onDelete: Cascade)
+  senderRole Role
+  message    String
+  createdAt  DateTime @default(now())
+
+  @@map("chat_messages")
+}
+
+enum ContactType {
+  FEEDBACK
+  SUGGESTION
+  COMPLAINT
+}
+
+enum TicketStatus {
+  OPEN
+  RESPONDED
+  TRANSFERRED
+  RESOLVED
+  CLOSED
+}
+
+model ContactMessage {
+  id                    String       @id @default(uuid())
+  userId                String
+  user                  User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  type                  ContactType
+  subject               String
+  message               String
+  rating                Int?
+  status                TicketStatus @default(OPEN)
+  adminResponse         String?
+  respondedAt           DateTime?
+  transferredToMentorId String?
+  transferredToMentor   Mentor?      @relation(fields: [transferredToMentorId], references: [id], onDelete: SetNull)
+  mentorNote            String? // mentor's private note back to admin - the learner's identity is never exposed to the mentor
+  autoEmailSent         Boolean      @default(false)
+  createdAt             DateTime     @default(now())
+
+  @@map("contact_messages")
+}
+
+model BusinessEnrollment {
+  id                   String    @id @default(uuid())
+  userId               String
+  user                 User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  businessTitle        String
+  skill                String
+  resourcesCompleted   Boolean   @default(false)
+  assignedPaperId      String?
+  assignedPaper        ExamPaper? @relation(fields: [assignedPaperId], references: [id], onDelete: SetNull)
+  examScore            Int?
+  examTotal            Int?
+  examPassed           Boolean?
+  examAttempts         Int       @default(0)
+  interviewScore       Int?
+  interviewPassed      Boolean?
+  interviewAttempts    Int       @default(0)
+  interviewStatus      String    @default("NOT_SCHEDULED") // NOT_SCHEDULED | SCHEDULED | COMPLETED
+  interviewScheduledAt DateTime?
+  meetLink             String?
+  resultsApproved      Boolean   @default(false)
+  status               String    @default("IN_PROGRESS") // IN_PROGRESS | PENDING_APPROVAL | COMPLETED | FAILED
+  createdAt            DateTime  @default(now())
+  updatedAt            DateTime  @updatedAt
+
+  @@unique([userId, businessTitle])
+  @@map("business_enrollments")
+}
+
+model ExamPaper {
+  id            String   @id @default(uuid())
+  mentorId      String
+  mentor        Mentor   @relation(fields: [mentorId], references: [id], onDelete: Cascade)
+  businessTitle String
+  title         String
+  createdAt     DateTime @default(now())
+
+  questions   ExamQuestion[]
+  enrollments BusinessEnrollment[]
+
+  @@map("exam_papers")
+}
+
+model ExamQuestion {
+  id            String   @id @default(uuid())
+  mentorId      String
+  mentor        Mentor   @relation(fields: [mentorId], references: [id], onDelete: Cascade)
+  businessTitle String
+  paperId       String?
+  paper         ExamPaper? @relation(fields: [paperId], references: [id], onDelete: Cascade)
+  question      String
+  options       Json
+  correctIndex  Int
+  createdAt     DateTime @default(now())
+
+  @@map("exam_questions")
+}
+
+model Certificate {
+  id            String   @id @default(uuid())
+  userId        String
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  businessTitle String
+  fileUrl       String
+  issuedByMentorId String?
+  issuedByMentor   Mentor? @relation(fields: [issuedByMentorId], references: [id], onDelete: SetNull)
+  issuedAt      DateTime @default(now())
+
+  @@unique([userId, businessTitle])
+  @@map("certificates")
+}
