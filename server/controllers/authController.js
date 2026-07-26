@@ -53,10 +53,11 @@ const verifyOtp = asyncHandler(async (req, res) => {
 });
 
 function setAuthCookie(res, token) {
+  const isProd = process.env.NODE_ENV === "production";
   res.cookie(COOKIE_NAME, token, {
     httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-    sameSite: "lax",
+    secure: isProd,
+    sameSite: isProd ? "none" : "lax",
     maxAge: TOKEN_EXPIRY_MS,
   });
 }
@@ -101,7 +102,12 @@ const login = asyncHandler(async (req, res) => {
 });
 
 const logout = asyncHandler(async (req, res) => {
-  res.clearCookie(COOKIE_NAME);
+  const isProd = process.env.NODE_ENV === "production";
+  res.clearCookie(COOKIE_NAME, {
+    httpOnly: true,
+    secure: isProd,
+    sameSite: isProd ? "none" : "lax",
+  });
   sendSuccess(res, { message: "Logged out successfully." });
 });
 
