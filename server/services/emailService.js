@@ -1,35 +1,14 @@
-const nodemailer = require("nodemailer");
+const { Resend } = require("resend");
 
-console.log("EMAIL_USER exists:", !!process.env.EMAIL_USER);
-console.log("EMAIL_PASS exists:", !!process.env.EMAIL_PASS);
-
-const transporter = nodemailer.createTransport({
-  host: "smtp.gmail.com",
-  port: 587,
-  secure: false,
-  family: 4,
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS,
-  },
-});
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 async function sendEmail({ to, subject, body }) {
-  console.log("📧 About to send email to:", to);
-
-  try {
-    await transporter.sendMail({
-      from: `"EntreSkill Hub" <${process.env.EMAIL_USER}>`,
-      to,
-      subject,
-      text: body,
-    });
-
-    console.log("✅ Email sent successfully");
-  } catch (err) {
-    console.error("❌ SMTP ERROR:", err);
-    throw err;
-  }
+  await resend.emails.send({
+    from: "EntreSkill Hub <onboarding@resend.dev>",
+    to,
+    subject,
+    text: body,
+  });
 }
 
 module.exports = { sendEmail };
