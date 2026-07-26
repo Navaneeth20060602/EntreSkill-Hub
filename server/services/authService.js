@@ -21,7 +21,9 @@ async function checkAvailability({ email, mobile }) {
   if (mobile) {
     const existingMobile = await User.findUnique({ where: { mobile } });
     if (existingMobile) {
-      const error = new Error("An account with this mobile number already exists.");
+      const error = new Error(
+        "An account with this mobile number already exists.",
+      );
       error.status = 409;
       throw error;
     }
@@ -31,8 +33,10 @@ async function checkAvailability({ email, mobile }) {
 async function registerUser({ fullName, email, mobile, password }) {
   await checkAvailability({ email, mobile });
 
-  if (!otpService.isMobileVerified(email)) {
-    const error = new Error("Please verify your email with the OTP before registering.");
+  if (!otpService.isVerified(email)) {
+    const error = new Error(
+      "Please verify your email with the OTP before registering.",
+    );
     error.status = 400;
     throw error;
   }
@@ -69,7 +73,9 @@ async function loginUser({ email, password }) {
 
   if (user.lockedUntil && user.lockedUntil > new Date()) {
     const minutesLeft = Math.ceil((user.lockedUntil - new Date()) / 60000);
-    const error = new Error(`Too many failed attempts. Try again in ${minutesLeft} minute${minutesLeft === 1 ? "" : "s"}.`);
+    const error = new Error(
+      `Too many failed attempts. Try again in ${minutesLeft} minute${minutesLeft === 1 ? "" : "s"}.`,
+    );
     error.status = 429;
     throw error;
   }
@@ -91,14 +97,17 @@ async function loginUser({ email, password }) {
     const error = new Error(
       shouldLock
         ? "Too many failed attempts. This account is locked for 15 minutes."
-        : "Invalid email or password."
+        : "Invalid email or password.",
     );
     error.status = shouldLock ? 429 : 401;
     throw error;
   }
 
   if (user.failedLoginAttempts > 0 || user.lockedUntil) {
-    await User.update({ where: { id: user.id }, data: { failedLoginAttempts: 0, lockedUntil: null } });
+    await User.update({
+      where: { id: user.id },
+      data: { failedLoginAttempts: 0, lockedUntil: null },
+    });
   }
 
   const token = generateToken(user.id);
@@ -135,7 +144,9 @@ async function resetPassword({ email, otp, newPassword }) {
 
   const isSameAsOld = await bcrypt.compare(newPassword, user.passwordHash);
   if (isSameAsOld) {
-    const error = new Error("New password cannot be the same as your current password. Please choose a different password.");
+    const error = new Error(
+      "New password cannot be the same as your current password. Please choose a different password.",
+    );
     error.status = 400;
     throw error;
   }
@@ -156,7 +167,9 @@ async function changePassword(userId, { currentPassword, newPassword }) {
 
   const isSameAsOld = await bcrypt.compare(newPassword, user.passwordHash);
   if (isSameAsOld) {
-    const error = new Error("New password cannot be the same as your current password. Please choose a different password.");
+    const error = new Error(
+      "New password cannot be the same as your current password. Please choose a different password.",
+    );
     error.status = 400;
     throw error;
   }
@@ -175,7 +188,9 @@ const googleClient = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
 async function loginWithGoogle(idToken) {
   if (!process.env.GOOGLE_CLIENT_ID) {
-    const error = new Error("Google Sign-In isn't configured on this server yet.");
+    const error = new Error(
+      "Google Sign-In isn't configured on this server yet.",
+    );
     error.status = 501;
     throw error;
   }
@@ -188,7 +203,9 @@ async function loginWithGoogle(idToken) {
     });
     payload = ticket.getPayload();
   } catch {
-    const error = new Error("Could not verify your Google account. Please try again.");
+    const error = new Error(
+      "Could not verify your Google account. Please try again.",
+    );
     error.status = 401;
     throw error;
   }
@@ -205,7 +222,9 @@ async function loginWithGoogle(idToken) {
       data: { fullName: name || email.split("@")[0], email, passwordHash },
     });
 
-    await require("../models/UserProgress").create({ data: { userId: user.id } });
+    await require("../models/UserProgress").create({
+      data: { userId: user.id },
+    });
   }
 
   const token = generateToken(user.id);

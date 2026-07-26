@@ -1,9 +1,20 @@
-// Mock email service. No real email provider (SendGrid/SES/etc.) is
-// configured yet, so this just logs what would be sent. Swap the body of
-// sendEmail() for a real provider call when ready to go live.
-function sendEmail({ to, subject, body }) {
-  console.log(`[MOCK EMAIL] To: ${to} | Subject: ${subject}\n${body}`);
-  return true;
+const nodemailer = require("nodemailer");
+
+const transporter = nodemailer.createTransport({
+  service: "gmail",
+  auth: {
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS,
+  },
+});
+
+async function sendEmail({ to, subject, body }) {
+  await transporter.sendMail({
+    from: `"EntreSkill Hub" <${process.env.EMAIL_USER}>`,
+    to,
+    subject,
+    text: body,
+  });
 }
 
 module.exports = { sendEmail };
