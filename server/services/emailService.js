@@ -1,11 +1,10 @@
-const { Resend } = require("resend");
-
-const resend = new Resend(process.env.RESEND_API_KEY);
+const sgMail = require("@sendgrid/mail");
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 async function sendEmail({ to, subject, body }) {
-  await resend.emails.send({
-    from: "EntreSkill Hub <onboarding@resend.dev>",
+  await sgMail.send({
     to,
+    from: process.env.SENDGRID_FROM_EMAIL,
     subject,
     text: body,
   });
