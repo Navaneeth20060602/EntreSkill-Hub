@@ -19,7 +19,14 @@ async function getStats() {
   const Mentor = require("../models/Mentor");
   const UserProgress = require("../models/UserProgress");
 
-  const [totalUsers, mentors, feedback, activeLearners, certificates, mentorList] = await Promise.all([
+  const [
+    totalUsers,
+    mentors,
+    feedback,
+    activeLearners,
+    certificates,
+    mentorList,
+  ] = await Promise.all([
     User.count({ where: { role: "USER" } }),
     User.count({ where: { role: "MENTOR" } }),
     mentorService.listAllFeedback(),
@@ -30,7 +37,11 @@ async function getStats() {
 
   const ratedMentors = mentorList.filter((m) => m.rating > 0);
   const avgMentorRating = ratedMentors.length
-    ? Math.round((ratedMentors.reduce((sum, m) => sum + m.rating, 0) / ratedMentors.length) * 10) / 10
+    ? Math.round(
+        (ratedMentors.reduce((sum, m) => sum + m.rating, 0) /
+          ratedMentors.length) *
+          10,
+      ) / 10
     : 0;
 
   return {
@@ -46,13 +57,8 @@ async function getStats() {
 // Step 1: send an OTP to the email the admin entered for the mentor, so we
 // confirm the mentor actually has access to that inbox before any login is
 // created for them (prevents the admin fat-fingering/making up an email).
-function sendMentorLoginOtp(email) {
-  const otp = otpService.generateOtp(email);
-  emailService.sendEmail({
-    to: email,
-    subject: "Verify your EntreSkill Hub mentor account",
-    body: `Your verification code is ${otp}. Share this with the admin setting up your mentor login, or enter it yourself if you're doing this together.`,
-  });
+async function sendMentorLoginOtp(email) {
+  const otp = await otpService.generateOtp(email);
   return otp;
 }
 

@@ -14,11 +14,18 @@ async function generateOtp(email) {
     expiresAt: Date.now() + OTP_TTL_MS,
   });
 
-  await sendEmail({
-    to: email,
-    subject: "EntreSkill Hub - Email Verification OTP",
-    body: `Your OTP is ${code}. It is valid for 5 minutes.`,
-  });
+  try {
+    await sendEmail({
+      to: email,
+      subject: "EntreSkill Hub - Email Verification OTP",
+      body: `Your OTP is ${code}. It is valid for 5 minutes.`,
+    });
+  } catch (err) {
+    console.error(
+      "Could not send OTP email (continuing anyway, demo OTP still works):",
+      err.message,
+    );
+  }
 
   return code;
 }

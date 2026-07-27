@@ -22,10 +22,13 @@ const getStats = asyncHandler(async (req, res) => {
 const sendMentorLoginOtp = asyncHandler(async (req, res) => {
   const { email } = req.body;
   if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-    return sendError(res, { status: 400, message: "Enter a valid email address." });
+    return sendError(res, {
+      status: 400,
+      message: "Enter a valid email address.",
+    });
   }
 
-  const otp = adminService.sendMentorLoginOtp(email);
+  const otp = await adminService.sendMentorLoginOtp(email);
   const isDemoOtpMode = process.env.SMS_PROVIDER !== "live";
 
   sendSuccess(res, {
@@ -38,11 +41,29 @@ const createMentorLogin = asyncHandler(async (req, res) => {
   const { email, password, otp } = req.body;
 
   if (!email || !password || !isValidPassword(password) || !otp) {
-    return sendError(res, { status: 400, message: "Email, a valid password (8+ characters, with a number and special character), and the OTP are required." });
+    return sendError(res, {
+      status: 400,
+      message:
+        "Email, a valid password (8+ characters, with a number and special character), and the OTP are required.",
+    });
   }
 
-  const user = await adminService.createMentorLogin(req.params.mentorId, { email, password, otp });
-  sendSuccess(res, { status: 201, message: "Mentor login created.", data: { user } });
+  const user = await adminService.createMentorLogin(req.params.mentorId, {
+    email,
+    password,
+    otp,
+  });
+  sendSuccess(res, {
+    status: 201,
+    message: "Mentor login created.",
+    data: { user },
+  });
 });
 
-module.exports = { getUsers, getFeedback, getStats, sendMentorLoginOtp, createMentorLogin };
+module.exports = {
+  getUsers,
+  getFeedback,
+  getStats,
+  sendMentorLoginOtp,
+  createMentorLogin,
+};
