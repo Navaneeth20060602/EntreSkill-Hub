@@ -382,7 +382,10 @@ async function main() {
 
   // --- Demo login accounts for the Admin and Mentor dashboards ---
   // Change these passwords after your first login in production.
-  const demoPasswordHash = await bcrypt.hash("Demo@123", 10);
+  const demoPassword =
+    process.env.SEED_DEMO_PASSWORD ||
+    require("crypto").randomBytes(9).toString("base64url");
+  const demoPasswordHash = await bcrypt.hash(demoPassword, 10);
 
   const adminUser = await prisma.user.upsert({
     where: { email: "admin@entreskillhub.com" },
@@ -427,8 +430,8 @@ async function main() {
     }
   }
 
-  console.log("Demo admin login: admin@entreskillhub.com / Demo@123");
-  console.log("Demo mentor login: rahul@example.com / Demo@123");
+  console.log(`Demo admin login: admin@entreskillhub.com / ${demoPassword}`);
+  console.log(`Demo mentor login: rahul@example.com / ${demoPassword}`);
 
   for (const scheme of schemes) {
     const existingScheme = await prisma.governmentScheme.findFirst({
