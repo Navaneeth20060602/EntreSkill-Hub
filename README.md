@@ -22,12 +22,12 @@ Business Administration (SBA) problem statement on micro-entrepreneurship.
 
 ## Tech Stack
 
-| Layer     | Technology                                      |
-|-----------|--------------------------------------------------|
-| Frontend  | React 19, Vite, React Router, Axios, Tailwind CSS |
-| Backend   | Node.js, Express 5                                |
-| Database  | PostgreSQL via Prisma ORM                         |
-| Auth      | JWT stored in an httpOnly cookie, bcrypt hashing  |
+| Layer    | Technology                                        |
+| -------- | ------------------------------------------------- |
+| Frontend | React 19, Vite, React Router, Axios, Tailwind CSS |
+| Backend  | Node.js, Express 5                                |
+| Database | PostgreSQL via Prisma ORM                         |
+| Auth     | JWT stored in an httpOnly cookie, bcrypt hashing  |
 
 ## Project Structure
 
@@ -112,8 +112,3 @@ This is Phase 1 of the platform. Native mobile apps, live loan/funding
 processing, advanced AI coaching and government subsidy integrations are
 out of scope for this phase - see [`docs/PROJECT_STRUCTURE.md`](./docs/PROJECT_STRUCTURE.md)
 for the full breakdown.
-
-## License
-
-This project was built for educational purposes as part of the Unified
-Mentor program.
